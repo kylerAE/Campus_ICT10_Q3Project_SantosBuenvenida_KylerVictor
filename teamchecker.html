@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Team Checker</title>
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #fdf6ec;
+            text-align: center;
+        }
+
+        .navbar {
+            padding: 15px;
+            text-align: right;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar a {
+            padding: 10px 18px;
+            text-decoration: none;
+            color: white;
+            border-radius: 8px;
+            margin-left: 10px;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 300%;
+            animation: rainbowMove 4s linear infinite;
+        }
+
+        @keyframes rainbowMove {
+            0% {background-position: 0%}
+            100% {background-position: 300%}
+        }
+
+        .card {
+            background: white;
+            width: 420px;
+            margin: 60px auto;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            border: none;
+            color: white;
+            font-weight: bold;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 300%;
+            animation: rainbowMove 3s linear infinite;
+            cursor: pointer;
+        }
+
+        img {
+            width: 220px;
+            margin-top: 15px;
+        }
+
+        .rainbowText {
+            font-weight: bold;
+            background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Sign Up</a>
+    <a href="teamchecker.html">Team Checker</a>
+    <a href="players.html">Players</a>
+</div>
+
+<div class="card">
+    <h2>Seatwork 2 - Team Checker</h2>
+
+    <p>Done with registration?</p>
+    <input type="checkbox" id="reg">
+
+    <p>Medical clearance?</p>
+    <input type="checkbox" id="med">
+
+    <p>Grade:</p>
+    <select id="grade">
+        <option value="">Select Grade</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+    </select>
+
+    <p>Section:</p>
+    <select id="section">
+        <option value="">Select Section</option>
+        <option>Sapphire</option>
+        <option>Emerald</option>
+        <option>Ruby</option>
+    </select>
+
+    <button onclick="checkTeam()">CHECK TEAM</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function checkTeam() {
+
+    let registered = document.getElementById("reg").checked;
+    let medical = document.getElementById("med").checked;
+    let grade = document.getElementById("grade").value;
+    let section = document.getElementById("section").value;
+
+    if (registered && medical && grade !== "" && section !== "") {
+
+        let teams = [
+            {name: "Blue Bears", img: "bluebears.jpg"},
+            {name: "Hornets", img: "hornets.jpg"},
+            {name: "Tigers", img: "tigers.jpg"},
+            {name: "Dogs", img: "dogs.jpg"}
+        ];
+
+        let randomTeam = teams[Math.floor(Math.random() * teams.length)];
+
+        document.getElementById("result").innerHTML =
+        "<div class='rainbowText'>🎉 Congratulations Grade " + grade +
+        " - " + section + "!<br>You are part of the " +
+        randomTeam.name + "!</div>" +
+        "<img src='" + randomTeam.img + "'>";
+
+    } else {
+
+        document.getElementById("result").innerHTML =
+        "<p style='color:red; font-weight:bold;'>Please complete all requirements.</p>";
+    }
+}
+</script>
+
+</body>
+</html>
